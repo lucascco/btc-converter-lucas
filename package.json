@@ -1,0 +1,62 @@
+{
+  "name": "btc-converter-lucas",
+  "version": "1.0.0",
+  "description": "CLI to converter bitcoins.",
+  "main": "index.js",
+  "scripts": {
+    "clear": "rimraf lib",
+    "build": "npm run clear && ./node_modules/.bin/babel src/*.js --out-dir lib",
+    "build:watch": "npm run build -- --watch",
+    "lint": "./node_modules/.bin/eslint src/*.js",
+    "prepush": "npm run lint",
+    "test": "./node_modules/.bin/mocha --require @babel/register tests/**/*.spec.js --reporter nyan",
+    "test:tdd": "npm run test -- --watch",
+    "test:coverage": "nyc npm test"
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucascco/btc-converter-lucas.git"
+  },
+  "keywords": [
+    "js",
+    "tdd",
+    "library"
+  ],
+  "author": "Lucas Corrêa <lucasccorrea@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucascco/btc-converter-lucas/issues"
+  },
+  "homepage": "https://github.com/lucascco/btc-converter-lucas#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "chai": "^4.2.0",
+    "coffeescript": "^2.3.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.1.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "rimraf": "^2.6.2"
+  }
+}
