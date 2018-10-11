@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var program = require('commander');
+const program = require('commander');
 const pkg = require('../package.json');
 
 
