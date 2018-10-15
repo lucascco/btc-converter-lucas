@@ -60,10 +60,14 @@
     "eslint-plugin-import": "^2.14.0",
     "husky": "^1.1.0",
     "mocha": "^5.2.0",
+    "nock": "^10.0.1",
     "nyc": "^13.0.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "sinon": "^7.0.0",
+    "sinon-chai": "^3.2.0"
   },
   "dependencies": {
-    "commander": "^2.19.0"
+    "commander": "^2.19.0",
+    "request": "^2.88.0"
   }
 }
