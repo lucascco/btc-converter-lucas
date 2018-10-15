@@ -2,14 +2,14 @@ const chai = require('chai');
 const nock = require('nock');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
+const expect = chai.expect;
+const chalk = require('chalk');
 
 chai.use(sinonChai);
 
-const expect = chai.expect;
+
 const exec = require('child_process').exec;
-
 const BTConverter = require('../src/BTConverter');
-
 const cliBtcConverter = './src/main.js';
 
 
@@ -40,7 +40,7 @@ describe('BTConverter', () => {
     BTConverter();
 
     setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith('1 BTC to BRL = 6515.47');
+      expect(consoleStub).to.have.been.calledWith(`${chalk.red(1)} BTC to ${chalk.blue('BRL')} = ${chalk.green('6515.47')}`);
       done();
     }, 300);
   });
@@ -54,7 +54,7 @@ describe('BTConverter', () => {
     BTConverter('USD', 10);
 
     setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith('10 BTC to USD = 6515.47');
+      expect(consoleStub).to.have.been.calledWith(`${chalk.red(10)} BTC to ${chalk.blue('USD')} = ${chalk.green('6515.47')}`);
       done();
     }, 300);
   });
@@ -68,7 +68,7 @@ describe('BTConverter', () => {
     BTConverter('USD', 10);
 
     setTimeout(() => {
-      expect(consoleStub).to.have.been.calledWith('API reply with erro. Wait few minutes.');
+      expect(consoleStub).to.have.been.calledWith(chalk.red('API reply with erro. Wait few minutes.'));
       done();
     }, 300);
   });
