@@ -1,4 +1,5 @@
-const request = require('request');
+require('@babel/polyfill');
+const request = require('request-promise-native');
 const chalk = require('chalk');
 const ora = require('ora');
 
@@ -7,18 +8,18 @@ const spinner = ora({
   color: 'yellow',
 });
 
-function BTConverter(current = 'BRL', amount = 1) {
+async function BTConverter(current = 'BRL', amount = 1) {
   const url = `https://apiv2.bitcoinaverage.com/convert/global?from=BTC&to=${current}&amount=${amount}`;
-  spinner.start();
-  request(url, (error, response, body) => {
-    try {
-      spinner.stop();
-      const apiResponse = JSON.parse(body);
-      console.log(`${chalk.red(amount)} BTC to ${chalk.blue(current)} = ${chalk.green(apiResponse.price)}`);
-    } catch (erroApi) {
-      console.log(chalk.red('API reply with erro. Wait few minutes.'));
-    }
-  });
+  try {
+    spinner.start();
+    const data = await request(url);
+    const apiResponse = JSON.parse(data);
+    console.info(`${chalk.red(amount)} BTC to ${chalk.blue(current)} = ${chalk.green(apiResponse.price)}`);
+  } catch (erroApi) {
+    console.info(chalk.red('API reply with erro. Wait few minutes.'));
+  } finally {
+    spinner.stop();
+  }
 }
 
 module.exports = BTConverter;
